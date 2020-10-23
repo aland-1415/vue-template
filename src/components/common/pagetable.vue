@@ -5,9 +5,24 @@
                 <!--自己写的el-table-column列展示在最前边-->
                 <slot></slot>
                 <template v-for="column in tableData.columns">
+                    <!--自动id-->
+                    <el-table-column
+                            v-if="typeof(column.type) != 'undefined' && column.type.trim() == 'autoId'"
+                            type="index"
+                            :index="index => (tableData.page - 1) * tableData.size + index + 1"
+                            :label="column.label"
+                            :width="column.width"
+                            :min-width="column.minWidth"
+                            :align="column.align"
+                            :fixed="column.fixed"
+                            :sortable="column.sortable"
+                            :resizable="column.resizable"
+                            :header-align="column.headerAlign"
+                            :style="column.style">
+                    </el-table-column>
                     <!--自定义单元格内容-->
                     <el-table-column
-                            v-if="typeof(column.templateScope) != 'undefined' && column.templateScope.trim() != ''"
+                            v-else-if="typeof(column.templateScope) != 'undefined' && column.templateScope.trim() != ''"
                             :label="column.label"
                             :width="column.width"
                             :min-width="column.minWidth"

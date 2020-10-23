@@ -93,12 +93,12 @@
                     size: 10,  //初始加载每页显示条数
                     total: 0,
                     params: {id : '', name : ''},  //默认查询参数
-                    url: 'http://rtp.dmall.com/testsuite/pageData',
+                    url: 'http://rtp.dmall.com/testcase/pageData',
                     // url: this.httpHost + '/testsuite/pageData',
                     columns:[
-                        {label: 'id', prop: 'id', fixed: ''},
+                        {label: 'id', type: "autoId", fixed: ''},
                         {label: '名称', prop: 'name'},
-                        {label: '自动执行', prop: 'autoExecuteName', minWidth: '80',sortable: false},
+                        {label: '方式', prop: 'testModeName', minWidth: '80',sortable: false},
                         {label: '自定义表格内容', templateScope:'cellTpl'},
                     ],
                     action: {showAction: true, label: '操作', minWidth: '50',
