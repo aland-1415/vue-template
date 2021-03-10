@@ -10,7 +10,7 @@ import './assets/css/icon.css';
 import './components/common/directives';
 import 'babel-polyfill';
 import axios from './components/common/httploading.js';
-import pagetable from './components/common/pagetable';
+import pagetable from './components/custom/pagetable';
 
 Vue.component('pagetable', pagetable);
 Vue.config.productionTip = false;
@@ -57,8 +57,27 @@ ElementUI.Dialog.props.closeOnClickModal.default = false;  //点击遮罩不关�
 // ElementUI.MessageBox.setDefaults({closeOnClickModal: false}); //点击遮罩不关闭MessageBox
 
 //自定义全局方法
+//jsonbody形式post
+Vue.prototype.postBody = function(url, data, succesCallBack){
+    url = this.envUrl(url);
+    Vue.prototype.$axios({
+        url: url,
+        method:"post",
+        data: data,
+    }).then(function (res) {
+        if(!res.data.success) {
+            Vue.prototype.$message.error(res.data.message)
+            return
+        }
+        if (typeof succesCallBack === "function"){
+            succesCallBack(res.data);
+        }
+    }).catch(err => {alert("网络错误: " + err)});
+};
+
 //form请求提交
 Vue.prototype.submitFormData = function(url, data, succesCallBack){
+    url = this.envUrl(url);
     axios({
         url: url,
         method:"post",
@@ -77,6 +96,7 @@ Vue.prototype.submitFormData = function(url, data, succesCallBack){
         }
     }).catch(err => {alert("网络错误: " + err)});
 };
+
 //PageData类型分页表格加载
 Vue.prototype.tableLoad = function (tableData, page) {
     tableData.page = page;
@@ -101,6 +121,32 @@ Vue.prototype.closeTab = function(path){
     closeTag != null && closeTag.click();
 }
 
-//用于环境切换
-// Vue.prototype.httpHost = 'http://localhost:8081';  //vue独立部署调试
-Vue.prototype.httpHost = '';   //线上或build后和后端一起部署时地址
+//对测试环境的前端定位到后端为8081
+Vue.prototype.envUrl = function(url) {
+    //如果自带前缀则不处理
+    if (url != undefined && url.indexOf("http") == -1){
+        //对于localhost的本地调试代码都重新修改到8081后台去
+        if (window.location.href.indexOf("localhost:8080") != -1){
+            url = "http://localhost:8081/" + url;
+        }
+    }
+    return url;
+}
+
+//如果是从其他页面带参数跳转的，刷新跳转组件已有的缓存
+Vue.mixin({
+    beforeRouteLeave: function(to, from, next){
+        let needClearCache = JSON.stringify(to.params) != '{}';
+        if (needClearCache){
+            let componentName = to.name;
+            let cache = this.$vnode.parent.componentInstance.cache;
+            let keys = this.$vnode.parent.componentInstance.keys;
+            for (let index in keys){
+                if(keys[index].indexOf(componentName) != -1){
+                    delete cache[keys[index]];
+                }
+            }
+        }
+        next();
+    }
+})
