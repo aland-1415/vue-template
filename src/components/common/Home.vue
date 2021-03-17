@@ -18,7 +18,7 @@
 
 <script>
 import vHead from './Header.vue';
-import vSidebar from './Sidebar.vue';
+import vSidebar from './SidebarClassical';
 import vTags from './Tags.vue';
 import bus from './bus';
 export default {

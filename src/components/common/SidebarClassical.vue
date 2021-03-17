@@ -4,9 +4,9 @@
             class="sidebar-el-menu"
             :default-active="onRoutes"
             :collapse="collapse"
-            background-color="#66b1ff"
-            text-color="#ffffff"
-            active-text-color="#4f5154"
+            background-color="#324157"
+            text-color="#bfcbd9"
+            active-text-color="#20a0ff"
             unique-opened
             router
         >
@@ -52,6 +52,7 @@
 <script>
 import bus from '../common/bus';
 export default {
+    name:'sidebarClassical',
     data() {
         return {
             collapse: false,
@@ -189,7 +190,13 @@ export default {
     height: 100%;
 }
 /*deep是与scoped相结合使用，用于只影响当前页面公共组件的样式，如果不加则样式修改不成功*/
-/deep/.el-submenu__title i{
-    color: white;
+/deep/.el-submenu ul .el-submenu__title,.el-menu-item{
+    background-color: #1f2d3d !important;
+}
+/deep/.el-menu-item:hover{
+    background-color: #1b222b !important;
+}
+/deep/.el-submenu ul .el-submenu__title:hover{
+    background-color: #141d2b !important;
 }
 </style>
