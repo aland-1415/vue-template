@@ -1,12 +1,13 @@
 <template>
     <div class="sidebar">
+        <div v-show="showlogo" class="logo">&nbsp;&nbsp;<i class="el-icon-lx-noticefill"></i>后台管理系统</div>
         <el-menu
             class="sidebar-el-menu"
             :default-active="onRoutes"
             :collapse="collapse"
-            background-color="#66b1ff"
-            text-color="#ffffff"
-            active-text-color="#4f5154"
+            background-color="#545c64"
+            text-color="#fff"
+            active-text-color="#ffd04b"
             unique-opened
             router
         >
@@ -55,6 +56,7 @@ export default {
     data() {
         return {
             collapse: false,
+            showlogo: true,
             items: [
                 {
                     icon: 'el-icon-lx-file',
@@ -166,16 +168,63 @@ export default {
             this.collapse = msg;
             bus.$emit('collapse-content', msg);
         });
+        this.getBreadcrumb(this.$route.path.replace('/', ''));
+    },
+    watch:{
+        $route(newValue, oldValue){
+            this.getBreadcrumb(newValue.path.replace('/', ''));
+        },
+        //优化logo在切换时的动画显示
+        collapse(newV, oldV){
+            if (newV){
+                this.showlogo = !newV;
+            } else {
+                setTimeout(()=> {
+                    this.showlogo = !newV;
+                }, 300);
+            }
+        }
+    },
+    methods: {
+        getBreadcrumb(index){
+            let menuOrder = this.findItemByIndex(index, this.items);
+            bus.$emit('breadcrumb', menuOrder);
+        },
+        findItemByIndex(index, items){
+            let menuOrder = [];
+            for (let i in items){
+                if (items[i].index == index){
+                    menuOrder.push(items[i].title);
+                    break;
+                }
+                if (items[i].subs) {
+                    let subMenuOrder = this.findItemByIndex(index, items[i].subs)
+                    if (subMenuOrder.length > 0){
+                        menuOrder.push(items[i].title);
+                        menuOrder = menuOrder.concat(subMenuOrder);
+                        break;
+                    }
+                }
+            }
+            return menuOrder;
+        }
     }
 };
 </script>
 
 <style scoped>
+.logo {
+    line-height: 55px;
+    color: #fff;
+    background: #545c64;
+    font-size: 22px;
+    width: 200px;
+}
 .sidebar {
     display: block;
     position: absolute;
     left: 0;
-    top: 55px;
+    top: 0px;
     bottom: 0;
     overflow-y: scroll;
 }

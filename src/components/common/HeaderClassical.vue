@@ -147,7 +147,6 @@ export default {
     margin-right: 5px;
     font-size: 24px;
 }
-.btn-bell,
 .btn-fullscreen {
     position: relative;
     width: 30px;

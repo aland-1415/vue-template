@@ -3,7 +3,7 @@
         <v-head></v-head>
         <v-sidebar></v-sidebar>
         <div class="content-box" :class="{'content-collapse':collapse}">
-            <v-tags></v-tags>
+<!--            <v-tags></v-tags>-->
             <div class="content">
                 <transition name="move" mode="out-in">
                     <keep-alive :include="tagsList">
@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import vHead from './Header.vue';
-import vSidebar from './SidebarClassical';
+import vHead from './HeaderWhite.vue';
+import vSidebar from './SidebarGrey.vue';
 import vTags from './Tags.vue';
 import bus from './bus';
 export default {
