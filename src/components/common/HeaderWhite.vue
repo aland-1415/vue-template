@@ -137,9 +137,11 @@ export default {
     height: 55px;
     font-size: 22px;
     color: #303133;
-    background-color: #fff;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 12%), 0 0 3px 0 rgb(0 0 0 / 4%);
+    box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
     border-bottom: 1px solid #d8dce5;
+    overflow: hidden;
+    background: #fff;
+    z-index: 5;
 }
 .header-left-collapseyes{
     position: relative;

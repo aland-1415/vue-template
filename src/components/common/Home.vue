@@ -18,8 +18,8 @@
 
 <script>
 import vHead from './HeaderWhite.vue';
-import vSidebar from './SidebarGrey.vue';
-import vTags from './Tags.vue';
+import vSidebar from './SidebarWhite.vue';
+import vTags from './TagsPlain.vue';
 import bus from './bus';
 export default {
     data() {

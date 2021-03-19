@@ -5,7 +5,7 @@
             class="sidebar-el-menu"
             :default-active="onRoutes"
             :collapse="collapse"
-            background-color="#545c64"
+            background-color="#66b1ff"
             text-color="#fff"
             active-text-color="#ffd04b"
             unique-opened
@@ -216,7 +216,7 @@ export default {
 .logo {
     line-height: 55px;
     color: #fff;
-    background: #545c64;
+    background: #66b1ff;
     font-size: 22px;
     width: 200px;
 }

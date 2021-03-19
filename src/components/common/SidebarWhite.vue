@@ -5,9 +5,9 @@
             class="sidebar-el-menu"
             :default-active="onRoutes"
             :collapse="collapse"
-            background-color="#545c64"
-            text-color="#fff"
-            active-text-color="#ffd04b"
+            background-color="#fff"
+            text-color="#2f3237"
+            active-text-color="#3eaf7c"
             unique-opened
             router
         >
@@ -215,8 +215,8 @@ export default {
 <style scoped>
 .logo {
     line-height: 55px;
-    color: #fff;
-    background: #545c64;
+    color: #2f3237;
+    background: #fff;
     font-size: 22px;
     width: 200px;
 }
