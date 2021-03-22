@@ -220,6 +220,7 @@ export default {
     font-size: 22px;
     width: 200px;
     border-bottom: 1px solid #ddd;
+    font-weight: 600;
 }
 .sidebar {
     display: block;
