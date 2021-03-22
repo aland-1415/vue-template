@@ -214,11 +214,12 @@ export default {
 
 <style scoped>
 .logo {
-    line-height: 55px;
+    line-height: 54px;
     color: #2f3237;
     background: #fff;
     font-size: 22px;
     width: 200px;
+    border-bottom: 1px solid #ddd;
 }
 .sidebar {
     display: block;
@@ -239,7 +240,27 @@ export default {
     overflow-y: scroll;
 }
 /*deep是与scoped相结合使用，用于只影响当前页面公共组件的样式，如果不加则样式修改不成功*/
-/deep/.el-submenu__title i{
-    color: white;
+/deep/
+.el-submenu__title i{
+    color: #2f3237;
+}
+/deep/
+.el-menu-item:hover{
+    color: #3eaf7c !important;
+    background-color: white !important;;
+}
+/deep/
+ul .el-submenu__title:hover{
+    color: #3eaf7c !important;
+    background-color: white !important;;
+}
+/deep/
+.el-menu-item.is-active{
+    font-weight: 800 !important;
+}
+/deep/
+.is-active.is-opened > .el-submenu__title{
+    font-weight: 800 !important;
+    color: #3eaf7c !important;
 }
 </style>
